@@ -2,9 +2,9 @@
 
 Bu projede Sipariş ve Stok Yönetimi olmak üzere iki yönetim uygulaması geliştirilmiştir.
 Sipariş Yönetiminde;
--Sistemde tanımlı siparişlere yeni siparişler ekleme,
--Siparişler tek yada bulk olarak Depo Yönetimine aktarma
--Sipariş İptali eğer depoda işlemdeyse ürün iptal onayı verilmeden uyarı verilmesi
+-Sistemde tanımlı ürünlerden yeni siparişler tanımlanabilmektedir,
+-Siparişler tek yada bulk olarak Depo Yönetimine aktarılabilmektedir. DAha önce aktarılan siparişler tekrar aktarılamamaktadır.
+-Sipariş İptal edilebilmektedir eğer depoda işlemdeyse ürün iptal onayı verilmeden işlem yapılmadan uyarı verilmesi
 -Siparişler ayrı bölüm olarak gözüküp anlaşılması için aktarılan sparişlerin rengi farklıdır
 
 Stok Yönetiminde;
