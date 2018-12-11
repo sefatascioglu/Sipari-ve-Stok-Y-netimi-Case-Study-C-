@@ -1,0 +1,122 @@
+﻿@model IEnumerable<CaseStudy001.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sipariş Listesi</h2>
+
+<style type="text/css">
+    .O {
+        background-color: lightgreen;
+    }
+
+    .D {
+        background-color: white;
+    }
+    .greenButton {
+        background-color: lightseagreen;
+        border: none;
+        padding: 10px 10px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .blueButton {
+        background-color: lightblue; /* Blue */
+        padding: 10px 10px;
+        font-size: 14px;
+    }
+    /* Blue */
+    .redButton {
+        background-color: lightcoral; /* Red */
+        border: none;
+        padding: 10px 10px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    /* Red */
+    .grayButton {
+        background-color: lightslategray;
+        border: none;
+        padding: 10px 10px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    /* Gray */
+</style>
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.TradeMark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductNumber)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="@item.Status">
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.TradeMark)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductNumber)
+            </td>
+            <td>
+                <div class="col-md-2">
+
+                </div>
+                <button type="button" class="greenButton" onclick="location.href='@Url.Action("approvedOrderById","StockManagement",new { id = item.Id })'"
+                    @{ if (item.Status.Trim().Equals("O"))
+                        { 
+                            @: disabled="disabled"
+                        }
+                    }> <b>Siparişi Onayla</b>
+                </button> |
+                <button type="button" class="redButton" onclick="location.href='@Url.Action("cancelledOrderById", "StockManagement", new { id = item.Id })'"
+                    @{ if (item.Status.Trim().Equals("O"))
+                        { 
+                            @: disabled="disabled"
+                        }
+                    }> <b>Sipariş İptal</b>
+                </button> |
+                <button type="button" class="blueButton" onclick="location.href='@Url.Action("completeOrderById", "StockManagement", new { id = item.Id })'"
+                    @{ if (!item.Status.Trim().Equals("O"))
+                        { 
+                            @: disabled="disabled"
+                        }
+                    }> <b>Sipariş Teslim Edildi</b>
+                </button>
+            </td>
+        </tr>
+                    }
+
+</table>

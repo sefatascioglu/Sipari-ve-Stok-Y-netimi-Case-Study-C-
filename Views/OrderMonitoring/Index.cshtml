@@ -1,0 +1,75 @@
+﻿@model IEnumerable<CaseStudy001.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sipariş İzleme</h2>
+
+<style type="text/css">
+    .I {
+        background-color: lightcoral;
+    }
+
+    .O {
+        background-color: lightgreen;
+    }
+
+    .A {
+        background-color: ghostwhite;
+    }
+
+    .D {
+        background-color: lightblue;
+    }
+
+    .T {
+        background-color: lightseagreen;
+    }
+</style>
+
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.TradeMark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductNumber)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class="@item.Status">
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.TradeMark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Size)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductNumber)
+        </td>
+    </tr>
+}
+
+</table>
+

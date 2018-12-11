@@ -1,0 +1,73 @@
+﻿@model CaseStudy001.Models.Order
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sipariş Oluşturma</h2>
+
+
+@using (Html.BeginForm("Create", "OrderManagement"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductId, "Ürün", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductId", null, htmlAttributes: new { onchange = "this.form.submit()" })
+                @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.TradeMark, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("TxtBoxOrdersCreateTradeMark", (string)@ViewBag.TradeMark, htmlAttributes: new { @readonly = "readonly", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.Product.TradeMark, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.Color, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("TxtBoxOrdersCreateColor", (string)@ViewBag.Color, htmlAttributes: new { @readonly = "readonly", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.Product.Color, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.Size, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("TxtBoxOrdersCreateSize", (string)@ViewBag.Size, htmlAttributes: new { @readonly = "readonly", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.Product.Size, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Yeni Sipariş Oluştur" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Listeye Dön", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

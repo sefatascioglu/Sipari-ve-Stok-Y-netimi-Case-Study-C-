@@ -1,0 +1,171 @@
+﻿@model IEnumerable<CaseStudy001.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Siparişler</h2>
+
+<style type="text/css">
+    .I {
+        background-color: lightcoral;
+    }
+
+    .O {
+        background-color: lightgreen;
+    }
+
+    .A {
+        background-color: ghostwhite;
+    }
+
+    .D {
+        background-color: lightblue;
+    }
+
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 10px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .button2 {
+        background-color: #008CBA; /* Blue */
+        border: none;
+        color: white;
+        padding: 10px 10px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    /* Blue */
+    .button3 {
+        background-color: brown; /* Red */
+        border: none;
+        color: white;
+        padding: 10px 10px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    /* Red */
+    .button4 {
+        background-color: lightslategray;
+        border: none;
+        color: white;
+        padding: 10px 10px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    /* Gray */
+    .button5 {
+        background-color: #555555;
+        border: none;
+        color: white;
+        padding: 10px 10px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+    }
+</style>
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.TradeMark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductNumber)
+        </th>
+        <th></th>
+    </tr>
+
+@{ 
+    List<int> orderListId = new List<int>();
+}
+
+
+    @foreach (var item in Model)
+    {
+
+
+        orderListId.Add(item.Id);
+
+            <tr class="@item.Status">
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.TradeMark)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Size)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductNumber)
+                </td>
+                <td>
+                    <div class="col-lg-3">
+
+                    </div>
+                    <button type="button" class="button" onclick="location.href='@Url.Action("sendOrderById","OrderManagement",new { id = item.Id })'">Siparişi Gönder</button> |
+                    <button type="button" class="button3" onclick="location.href='@Url.Action("cancelledOrderById", "OrderManagement", new { id = item.Id })'">Sipariş İptal</button>
+                </td>
+            </tr>
+
+    }
+
+</table>
+
+
+
+<div class="row">
+    <div class="col-md-8">
+
+    </div>
+    <div class="col-md-2">
+        <p>
+            <button type="button" class="button2" onclick="location.href='@Url.Action("sendOrdersWithBulk","OrderManagement")'">Toplu Sipariş Gönder</button>
+        </p>
+    </div>
+    <div class="col-md-2">
+        <p>
+            <button type="button" class="button4" onclick="location.href='@Url.Action("Create","OrderManagement")'">Yeni Sipariş Ekle</button>
+        </p>
+    </div>
+</div>
+
+
+@if (!String.IsNullOrEmpty((string)@TempData["OrderManagementErrorSendOrder"]))
+{
+    @:
+    <script type="text/javascript">alert('@TempData["OrderManagementErrorSendOrder"]')
+    </script>
+    TempData["OrderManagementErrorSendOrder"] = "";
+}
+
+
+
+
